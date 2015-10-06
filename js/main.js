@@ -11,17 +11,28 @@ var lastUpdate = Date.now(); //Tempo atual (para a fisica)
 var Player1 = new Player(312,canvas.height - (canvas.height * 0.95),context);
 var Player2 = new Player(312,canvas.height - (canvas.height * 0.10),context);
 var Bola = new ball(100,100,context);
+var buttonPlay = new Image();
+buttonPlay.src = 'imgs/play-Button.jpg';
 var img = new Image();
 img.src = 'imgs/fundo.png';
+var gameStart = true;
 //inicializando o jogo
 function init(){
   //Adicionar as animacoes aqui
   //
-  incontext.save();
+  if(gameStart){
   gameloop(); //Chamar o gameloop
+}else{
+  mainMenu();
 }
-Bola.collidables.push(Player1);
-Bola.collidables.push(Player2);
+}
+
+function mainMenu(){
+  requestAnimFrame(mainMenu);
+  context.clearRect(0,0, canvas.width, canvas.height);
+  context.drawImage(buttonPlay,200,500);
+
+}
 function gameloop(){
 //requisitar o proximo frame
 requestAnimFrame(gameloop);
@@ -41,10 +52,10 @@ function update(){ //Atualiza o estado interno do jogo
 
 if(Bola.isCollidingWith(Player1.getCollider())){
   Bola.vy *= -1;
-  Bola.y += 10;
+  Bola.y += 15;
 }else if(Bola.isCollidingWith(Player2.getCollider())){
   Bola.vy *= -1;
-  Bola.y -= 10;
+  Bola.y -= 15;
 }
 
   Player1.update(keys,dt,"Player1");
