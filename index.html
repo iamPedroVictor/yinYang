@@ -7,9 +7,24 @@
 </head>
 <body onload="init()">
   <h1> Home </h1>
-    <canvas id="canvas" width="1280" height="860">
+    <!--canvas id="canvas" width="1280" height="860">
          This text is displayed if your browser does not support HTML5 Canvas.
-    </canvas>
+    </canvas-->
+    <div id="canvas-container" class="container_border">
+      <button id="restart" class="button">Restart</button>
+      <button id="Menu" class="button">Menu</button>
+      <canvas id="canvas" width="1080" height="720">
+          Navegador não compatível com HTML5 Canvas
+      </canvas>
+    </div>
+
+  <div id="menu-container" class="container_border">
+      <button id="start_btn" class="button">Start</button>
+  </div>
+
+  <!-- Image loader -->
+  <script type="text/javascript" src="js/imageLoader.js"></script>
+
   <!-- Script que detecta as teclas -->
 	<script type="text/javascript" src="js/keyHandler.js"></script>
 
@@ -18,7 +33,11 @@
 
   <script type="text/javascript" src="js/ball.js"></script>
 
+  <script type="text/javascript" src="js/blocos.js"></script>
+
   <!-- Script com o game loop -->
+<script type="text/javascript" src="js/game.js"></script>
+
 <script type="text/javascript" src="js/main.js"></script>
 
 </body>

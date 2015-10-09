@@ -1,10 +1,87 @@
-h1{
-  color: blue;
-  text-align: center;
-  font-size: 40;
-}
+body {
+      background: #fff;
+  }
+  @font-face {
+      font-family: 'Magic Pies';
+      src: url('../assets/MagicPies.ttf');
+  }
 
-canvas {
-  border-style:ridge;
-  border-color: #FFCC00;
-}
+  h1 {
+      text-align: center;
+      color: #00bfff;
+      font: Magic Pies;
+  }
+
+
+  .container_border {
+      -webkit-box-shadow: 1px 1px 40px #00bfff;
+      -moz-box-shadow: 1px 1px 40px #00bfff;
+      -ms-box-shadow: 1px 1px 40px #00bfff;
+      -o-box-shadow: 1px 1px 40px #00bfff;
+      box-shadow: 1px 1px 40px #00bfff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      border-radius: 10px;
+  }
+  #canvas-container {
+      position: relative;
+      display: none;
+      margin: 0 auto;
+      width: 1080px;
+      height: 720px;
+  }
+  #menu_btn {
+      position: absolute;
+      top: 800px;
+      left: 600px;
+      visibility: hidden;
+  }
+
+  #restart_btn {
+      position: absolute;
+      top: 800px;
+      left: 600px;
+      visibility: hidden;
+  }
+  /* Menu Style */
+  #menu-container {
+      display: block;
+      margin: 0 auto;
+      width: 1080px;
+      height: 720px;
+      background-image: url('../imgs/fundo.png');
+  }
+  #start_btn {
+      position: relative;
+      top: 300px;
+      left:240px;
+  }
+  /* button styles*/
+  .button {
+      color: #000000;
+      font-size: 80px;
+      background: transparent;
+      font-family: Magic Pies;
+      border: none;
+      cursor: pointer;
+  }
+  .button:hover {
+      border: none;
+      color: #4F4F4F;
+  }
+  .button:active  {
+      border: none;
+  }
+  .credits > p {
+      font-family: Verdana, Arial, sans-serif;
+      color:  #00bfff;
+      margin: 5px 0 0 0;
+  }
+  .text-container {
+      font-size: 14px;
+      margin: 35px auto;
+      width: 600px;
+      text-align: center;
+  }

@@ -8,7 +8,7 @@ function ball(x,y,context){
   this.vy = 0.5;
   this.collidables = [];
 
-  this.color = 'blue';
+  this.color = 'black';
   this.raio = 10;
 }
 

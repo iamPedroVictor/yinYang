@@ -4,8 +4,8 @@
 function Player(x,y, context){
   this.x = x;
   this.y = y;
-  this.width = 200;
-  this.height = 50;
+  this.width = 176;
+  this.height = 121;
   this.context = context;
   this.velocityX = 0.5; //pixel/segundo
   this.velocityY = 0.1; //pixel/segundo
@@ -13,10 +13,7 @@ function Player(x,y, context){
 
 Player.prototype.draw = function(){
   //Irar desenhar na tecla
-  this.context.save();
-  this.context.fillStyle = this.color;
-  this.context.fillRect(this.x,this.y,this.width, this.height);
-  this.context.restore();
+  this.context.drawImage(this.image,this.x,this.y);
 }
 
 Player.prototype.update = function(input, dt, controler){
