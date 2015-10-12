@@ -41,7 +41,8 @@
         'player2' : 'sprite/pandaP2.png',
         'bolaAzul': 'sprite/bolaazul.png',
         'bolaVermelha': 'sprite/bolavermelha.png',
-        'fundo': 'imgs/fundo.jpg'
+        'fundo': 'imgs/fundo.jpg',
+        'vitoria': 'imgs/VITORIA.jpg'
     }, function(){
         menuElem.style.display = "block";
     });

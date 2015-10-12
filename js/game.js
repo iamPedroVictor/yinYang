@@ -143,11 +143,11 @@ function render(){//Desenhar os objetos no canvas
 function gameOver(){
 console.debug("GameOver");
 context.clearRect(0,0, canvas.width, canvas.height);
-context.font = '42pt Magic Pies';
+context.font = '42pt CHINESETAKEAWAY';
 context.fillStyle = '#000000';
 context.fillText("O Jogador " + win + " Venceu", (canvas.width / 2) - 180, (canvas.height / 2) - 50);
 restart_btn.style.display = "block";
-menu_btn.style.display = "block"
+menu_btn.style.display = "block";
 console.debug("Restart block");
 restart_btn.onclick = function(){
   gameInit();
@@ -155,7 +155,7 @@ restart_btn.onclick = function(){
 menu_btn.onclick = function(){
     menuElem.style.display = "block";
     canvasElem.style.display = "none";
-    Init();
+    init();
   }
 }
 
