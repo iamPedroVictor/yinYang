@@ -7,25 +7,20 @@ function ball(x,y,context){
   this.vx = 0.5;
   this.vy = 0.5;
   this.collidables = [];
+  this.width = 25;
+  this.height = 25;
 
   this.color = 'black';
-  this.raio = 10;
 }
 
-ball.prototype.draw = function(){
-  this.context.save();
-  this.context.fillStyle = this.cor;
-  this.context.beginPath();
-  this.context.arc(this.x, this.y, this.raio, 0, 2 * Math.PI, false);
-  this.context.fill();
-  this.context.restore();
-}
 
 ball.prototype.update = function(dt){
-  if(this.x < this.raio || this.x > canvas.width - this.raio)
+  if(this.x < this.width || this.x > canvas.width - this.width)
     this.vx *= -1;
-  if(this.y < this.raio || this.y > canvas.height - this.raio)
+  if(this.y < this.height || this.y > canvas.height - this.height)
     this.vy *= -1;
+
+
 
   this.x += this.vx * dt;
   this.y += this.vy * dt;
@@ -33,7 +28,7 @@ ball.prototype.update = function(dt){
 }
 
 ball.prototype.getCollider = function(){
-  return {x: this.x - this.raio, y: this.y - this.raio, w: 20, h: 20};
+  return {x: this.x, y: this.y, w: 35, h: 35};
 }
 
 ball.prototype.isCollidingWith = function(other){

@@ -1,17 +1,17 @@
 //Objeto que registra quais keys foram pressionadas
 //Pode ser usado diretamente no main.js
 // Outras teclas podem ser adicionadas utilizando os códigos disponíveis aqui:
-//
+// http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
 var keys = {
     up: false, // Indica se a tecla cima foi pressionada
     down: false, // Indica se a tecla baixo foi pressionada
     left: false, // Indica se a tecla esquerda foi pressionada
     right: false, // Indica se a tecla direita foi pressionada
     code : { // codigos para cada tecla
-		left : 37,
-		right : 39,
-    up: 65,
-		down : 68
+		left : 38,
+		right : 40,
+    up: 87,
+		down : 83
 	}
 }
 

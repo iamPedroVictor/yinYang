@@ -4,13 +4,15 @@
 var canvas = document.getElementById("canvas"); //Referencia do canvas
 var context = canvas.getContext('2d'); //Contexto
 var fps = 60; //fps desejado
-var gameStart = false;
+var gameStart = true;
 var lastUpdate = null; //Tempo atual (para a fisica)
 var win = '';
 var restart_btn = document.getElementById("restart");
 var menu_btn = document.getElementById("Menu");
-var Player1 = new Player(312,canvas.height - (canvas.height * 0.98),context);
-var Player2 = new Player(312,canvas.height - (canvas.height * 0.18),context);
+var menuElem = document.getElementById("menu-container");
+var canvasElem = document.getElementById("canvas-container");
+var Player1 = new Player(canvas.width - (canvas.width * 0.98),(canvas.height/2)-50,context);
+var Player2 = new Player(canvas.width - (canvas.width * 0.10),(canvas.height/2)-50,context);
 var BolaO = new ball(8,100,context);
 var BolaT = new ball(8,canvas.height/2,context);
 //Objetos do jogo
@@ -18,10 +20,10 @@ var blocosGame = [];
 
 //inicializando o jogo
 function gameInit(){
-  Player1 = new Player(312,canvas.height - (canvas.height * 0.98),context);
-  Player2 = new Player(312,canvas.height - (canvas.height * 0.18),context);
-  BolaO = new ball(8,100,context);
-  BolaT = new ball(8,canvas.height/2,context);
+  Player1 = new Player(canvas.width - (canvas.width * 0.98),(canvas.height/2)-50,context);
+  Player2 = new Player(canvas.width - (canvas.width * 0.10),(canvas.height/2)-50,context);
+  BolaO = new ball(canvas.width - (canvas.width * 0.60),100,context);
+  BolaT = new ball(canvas.width - (canvas.width * 0.30),canvas.height/2,context);
   restart_btn.style.display = "none";
   menu_btn.style.display = "none"
 
@@ -60,29 +62,60 @@ function update(){ //Atualiza o estado interno do jogo
   lastUpdate = now;
   //Atualizar posicao do player, com as teclas e deltaTime
 
+
+//Atualizar a bola ao colidir com os players
 if(BolaO.isCollidingWith(Player1.getCollider())){
-  BolaO.vy *= -1;
-  BolaO.y += 15;
+  BolaO.vx *= -1;
+  BolaO.x += 15;
 }else if(BolaO.isCollidingWith(Player2.getCollider())){
-  BolaO.vy *= -1;
-  BolaO.y -= 15;
+  BolaO.vx *= -1;
+  BolaO.x -= 15;
+}
+
+if(BolaT.isCollidingWith(Player1.getCollider())){
+  BolaT.vy *= -1;
+  BolaT.y += 15;
+}else if(BolaT.isCollidingWith(Player2.getCollider())){
+  BolaT.vx *= -1;
+  BolaT.x -= 15;
 }
 
 for(var i= 0; i < blocosGame.length; i++) {
 
   if(BolaO.isCollidingWith(blocosGame[i].getCollider())){
     blocosGame.splice(i, 1);
-    BolaO.vy *= -1;
+  //  BolaO.vy *= -1;
+    BolaO.vx *= -1;
   }
-
 }
-if(BolaO.y - BolaO.raio < 0){
+
+for(var i= 0; i < blocosGame.length; i++) {
+
+  if(BolaT.isCollidingWith(blocosGame[i].getCollider())){
+    blocosGame.splice(i, 1);
+  //  BolaT.vy *= -1;
+    BolaT.vx *= -1;
+  }
+}
+
+//condicao de vitoria
+if(BolaO.x - BolaO.raio < 0){
   win = 'Player2';
   gameStart = false;
-} else if( BolaO.y > canvas.height - BolaO.raio){
+} else if( BolaO.x > canvas.width - BolaO.width){
   win = 'Player1';
   gameStart = false;
 }
+
+if(BolaT.x - BolaT.width < 0){
+  win = 'Player2';
+  gameStart = false;
+} else if( BolaT.x > canvas.width - BolaO.width){
+  win = 'Player1';
+  gameStart = false;
+}
+
+//update dos objetos
   Player1.update(keys,dt,"Player1");
   Player2.update(keys,dt,"Player2");
   BolaO.update(dt);
@@ -97,10 +130,10 @@ function render(){//Desenhar os objetos no canvas
   context.drawImage(ImageLoader.images['fundo'],0,0);
   //Camada de fundo - fim
   //Camada dos objetos - inicio
-  BolaO.draw();
-  BolaT.draw();
-  context.drawImage(ImageLoader.images['player1'],Player1.x,Player1.y);
-  context.drawImage(ImageLoader.images['player2'],Player2.x,Player2.y);
+  context.drawImage(ImageLoader.images['bolaAzul'],BolaO.x,BolaO.y,35,35);
+  context.drawImage(ImageLoader.images['bolaVermelha'],BolaT.x,BolaT.y,35,35);
+  context.drawImage(ImageLoader.images['player1'],Player1.x,Player1.y,100,100);
+  context.drawImage(ImageLoader.images['player2'],Player2.x,Player2.y,100,100);
   for(var i = 0; i < blocosGame.length; i++){
     blocosGame[i].draw();
   }
@@ -120,8 +153,10 @@ restart_btn.onclick = function(){
   gameInit();
 }
 menu_btn.onclick = function(){
-  gameInit();
-}
+    menuElem.style.display = "block";
+    canvasElem.style.display = "none";
+    Init();
+  }
 }
 
 
