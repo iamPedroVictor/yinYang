@@ -2,14 +2,14 @@ body {
       background: #fff;
   }
   @font-face {
-      font-family: 'CHINESETAKEAWAY';
-      src: url('../assets/CHINESETAKEAWAY.ttf');
+      font-family: 'Magic Pies';
+      src: url('../assets/MagicPies.ttf');
   }
 
   h1 {
       text-align: center;
       color: #00bfff;
-      font: CHINESETAKEAWAY;
+      font: Magic Pies;
   }
 
 
@@ -51,34 +51,19 @@ body {
       margin: 0 auto;
       width: 1080px;
       height: 720px;
-      background-image: url('../imgs/MENU-FUNDO.png');
+      background-image: url('../imgs/fundo.png');
   }
   #start_btn {
       position: relative;
-      top: 510px;
-      left:460px;
+      top: 300px;
+      left:240px;
   }
-  #about_btn{
-    position: relative;
-    top: 580px;
-    left:335px;
-  }
-
-  /*About Styles*/
-  #about-container {
-      display: none;
-      margin: 0 auto;
-      width: 1080px;
-      height: 720px;
-      background-image: url('../imgs/CREDITOS.jpg');
-  }
-
   /* button styles*/
   .button {
       color: #000000;
-      font-size: 50px;
+      font-size: 80px;
       background: transparent;
-      font-family: CHINESETAKEAWAY;
+      font-family: Magic Pies;
       border: none;
       cursor: pointer;
   }
