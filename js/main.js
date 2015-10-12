@@ -45,9 +45,9 @@
         'vitoria': 'imgs/VITORIA.jpg'
     }, function(){
         menuElem.style.display = "block";
+        bgSound.currentTime = 0;
+        bgSound.play();
     });
-      bgSound.currentTime = 0;
-      bgSound.play();
   }
 
   window.init = init;
