@@ -7,14 +7,15 @@ var fps = 60; //fps desejado
 var gameStart = true;
 var lastUpdate = null; //Tempo atual (para a fisica)
 var win = '';
-var restart_btn = document.getElementById("restart");
-var menu_btn = document.getElementById("Menu");
 var menuElem = document.getElementById("menu-container");
 var canvasElem = document.getElementById("canvas-container");
+var overElem = document.getElementById("gameOver-container");
 var Player1 = new Player(canvas.width - (canvas.width * 0.98),(canvas.height/2)-50,context);
 var Player2 = new Player(canvas.width - (canvas.width * 0.10),(canvas.height/2)-50,context);
 var BolaO = new ball(8,100,context);
 var BolaT = new ball(8,canvas.height/2,context);
+var restart_btn = document.getElementById("restart");
+var menu_btn = document.getElementById("Menu");
 //Objetos do jogo
 var blocosGame = [];
 
@@ -24,8 +25,6 @@ function gameInit(){
   Player2 = new Player(canvas.width - (canvas.width * 0.10),(canvas.height/2)-50,context);
   BolaO = new ball(canvas.width - (canvas.width * 0.60),100,context);
   BolaT = new ball(canvas.width - (canvas.width * 0.30),canvas.height/2,context);
-  restart_btn.style.display = "none";
-  menu_btn.style.display = "none"
 
   lastUpdate = Date.now(); //Tempo atual (para a fisica)
 
@@ -143,16 +142,20 @@ function render(){//Desenhar os objetos no canvas
 function gameOver(){
 console.debug("GameOver");
 context.clearRect(0,0, canvas.width, canvas.height);
-context.font = '42pt CHINESETAKEAWAY';
-context.fillStyle = '#000000';
-context.fillText("O Jogador " + win + " Venceu", (canvas.width / 2) - 180, (canvas.height / 2) - 50);
-restart_btn.style.display = "block";
-menu_btn.style.display = "block";
+//context.drawImage(ImageLoader.images['vitoria'],0,0);
+//context.font = '40pt CHINESETAKEAWAY';
+//context.fillStyle = '#000000';
+//context.fillText("O Jogador " + win + " Venceu", (canvas.width / 2) - 220, canvas.height - (canvas.height * 0.10));
+canvasElem.style.display = "none";
+overElem.style.display = 'block';
 console.debug("Restart block");
 restart_btn.onclick = function(){
   gameInit();
+  canvasElem.style.display = "block";
+  overElem.style.display = 'none';
 }
 menu_btn.onclick = function(){
+    overElem.style.display = 'none';
     menuElem.style.display = "block";
     canvasElem.style.display = "none";
     init();
