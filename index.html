@@ -6,9 +6,10 @@
   <meta name="keywords" content="HTML,JavaScript, Breakout,UEA,Game">
 </head>
 <body onload="init()">
+  <!-- cabecalho -->
   <div id="webTOp" class="top_border">
     <div id="logo">
-      <a href="http://www1.uea.edu.br/">
+      <a href="http://www1.uea.edu.br/" target="_blank">
         <img src="imgs/logoUEA.png" alt="UEA" style="width:54px;height:54px;">
       </a>
     </div>
@@ -16,22 +17,23 @@
       <h1> Tecnologia em Jogos Digitais </h1>
     </div>
   </div>
+  <!-- Canvas -->
   <div id="canvas-container" class="container_border">
     <canvas id="canvas" width="1080" height="720">
       Navegador não compatível com HTML5 Canvas
     </canvas>
   </div>
-
+  <!-- Menu -->
   <div id="menu-container" class="container_border">
       <button id="start_btn" class="button">Start</button>
       <button id="about_btn" class="button">About</button>
   </div>
-
+  <!-- Game Over -->
   <div id="gameOver-container" class="container_border">
     <button id="restart" class="button">Restart</button>
     <button id="Menu" class="button">Menu</button>
   </div>
-
+  <!-- About -->
   <div id="about-container" class="container_border">
       <button id="back_btn" class="button">Back</button>
   </div>
