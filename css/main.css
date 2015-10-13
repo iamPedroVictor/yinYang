@@ -7,8 +7,20 @@ body {
   }
 
   h1 {
-      text-align: center;
-      font-family: CHINESETAKEAWAY;
+    margin-top: initial;
+    margin-left: 200px;
+    width: 800px;
+    height: 25px;
+    text-align: center;
+    font-family: CHINESETAKEAWAY;
+  }
+
+  #logo{
+    float: initial;
+    padding-top: 0px;
+    margin-left: 100px;
+    width: 0px;
+    height: 30px;
   }
 
 

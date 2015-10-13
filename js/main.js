@@ -35,7 +35,6 @@
 
 
   function init() {
-
     ImageLoader.load({
         'player1' : 'sprite/pandaP1.png',
         'player2' : 'sprite/pandaP2.png',
