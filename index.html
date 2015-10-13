@@ -6,45 +6,21 @@
   <meta name="keywords" content="HTML,JavaScript, Breakout,UEA,Game">
 </head>
 <body onload="init()">
-  <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '510851802406812',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-  </script>
-  
-  <div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
-
   <div id="webTOp" class="top_border">
     <div id="logo">
       <a href="http://www1.uea.edu.br/">
-      <img src="imgs/logoUEA.png" alt="UEA" style="width:54px;height:54px;">
-    </a>
+        <img src="imgs/logoUEA.png" alt="UEA" style="width:54px;height:54px;">
+      </a>
     </div>
     <div id="texts" class="top_border">
       <h1> Tecnologia em Jogos Digitais </h1>
     </div>
   </div>
-    <div id="canvas-container" class="container_border">
-      <canvas id="canvas" width="1080" height="720">
-          Navegador não compatível com HTML5 Canvas
-      </canvas>
-    </div>
+  <div id="canvas-container" class="container_border">
+    <canvas id="canvas" width="1080" height="720">
+      Navegador não compatível com HTML5 Canvas
+    </canvas>
+  </div>
 
   <div id="menu-container" class="container_border">
       <button id="start_btn" class="button">Start</button>
