@@ -4,8 +4,8 @@ function ball(x,y,context){
   this.context = context;
   this.x = x;
   this.y = y;
-  this.vx = 0.5;
-  this.vy = 0.5;
+  this.vx = 0.3;
+  this.vy = 0.3;
   this.collidables = [];
   this.width = 25;
   this.height = 25;
@@ -17,10 +17,13 @@ function ball(x,y,context){
 ball.prototype.update = function(dt){
   if(this.x < this.width || this.x > canvas.width - this.width)
     this.vx *= -1;
-  if(this.y < this.height || this.y > canvas.height - this.height)
+  if(this.y < this.height ){
     this.vy *= -1;
-
-
+    this.y += 10;
+  } else if(this.y > canvas.height - this.height){
+    this.vy *= -1;
+    this.y -= 10;
+  }
 
   this.x += this.vx * dt;
   this.y += this.vy * dt;
