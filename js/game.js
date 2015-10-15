@@ -20,26 +20,36 @@ var contadori = 0;
 var contadorj = 0;
 var timei = 0;
 var timej = 0;
-//Objetos do jogo
 var blocosGame = [];
+//Objetos do jogo
+var bgSound = new Audio("assets/menu_converted.ogg");
+bgSound.loop = true;
 
 //inicializando o jogo
 function gameInit(){
+  //limpeza blocosGame
+  blocosGame.splice(0,blocosGame.length);
+  bgSound.currentTime = 0;
+  bgSound.play();
+
   var contadori = 0;
   var contadorj = 0;
   Player1 = new Player(canvas.width - (canvas.width * 0.98),(canvas.height/2)-50,context);
   Player2 = new Player(canvas.width - (canvas.width * 0.10),(canvas.height/2)-50,context);
   BolaO = new ball((Player1.x + 115),(Player1.y - 50),context);
-  BolaT = new ball((Player2.x - 10),(Player2.y - 50),context);
+  BolaT = new ball((Player2.x - 115),(Player2.y - 50),context);
 
   lastUpdate = Date.now(); //Tempo atual (para a fisica)
 
   //Adicionar as animacoes aqui
-  for(var i = 0; i < 12; i++){
-    blocosGame.push(new Blocos(
-      (10 + i*60),
-      (canvas.height/2),
-      context))
+  for(var i = 0; i < 5; i++){
+    for(var j= 0; j < 7; j++){
+      blocosGame.push(new Blocos(
+        (460 + i*24),
+        (250 + j*30),
+        context));
+        console.debug("Criou bloco");
+    }
   }
   gameStart = true;
   gameloop(); //Chamar o gameloop
@@ -66,72 +76,107 @@ function update(){ //Atualiza o estado interno do jogo
   var dt = now - lastUpdate;
   lastUpdate = now;
 
-  //Atualizar posicao do player, com as teclas e deltaTime
+//Atualizar posicao do player, com as teclas e deltaTime
 
+//Reduzir velocidade das bolas, até atingir um valor mínimo
+//if(((BolaO.vx < -0.3)||(0.3 < BolaO.vx)) && ((BolaO.vy < -0.3)||(0.3 < BolaO.vy))){
+/*if(0.7 < (BolaO.vx + BolaO.vx)){
+  BolaO.vx *= 0.98
+  BolaO.vy *= 0.98
+}
+if(0.7 < (BolaT.vx + BolaT.vx)){
+  BolaT.vx *= 0.98
+  BolaT.vy *= 0.98
+}
+*/
 //Atualizar a bola ao colidir com os players
 if(BolaO.isCollidingWith(Player1.getCollider("Player1")) && contadori == 0){
-  if(BolaO.y+35 < Player1.y + 11){
-    BolaO.vy *= -1;
-    BolaO.y -= 10;
-  } else if(Player1.y + 90 < BolaO.y){
-    BolaO.vy *= -1;
-    BolaO.y += 10;
+  if((keys.kw == true) && (-0.8 < BolaO.vy)){
+    BolaO.vy -= 0.2
   }
-  BolaO.vx *= -1;
+  else if((keys.ks == true) && (BolaO.vy < 0.8)){
+    BolaO.vy += 0.2
+  }
+  if((BolaO.y+35 < Player1.y + 21) && (0 < BolaO.vy)){
+    BolaO.y -= 10;
+    BolaO.vy *= -1;
+  } else if((Player1.y + 80 < BolaO.y) && (BolaO.vy < 0)){
+    BolaO.y += 10;
+    BolaO.vy *= -1;
+  }
   BolaO.x += 10;
+  BolaO.vx = 0.5;
   contadori = 1;
+
 }else if(BolaO.isCollidingWith(Player2.getCollider("Player2")) && contadori == 0){
-  if(BolaO.y+35 < Player2.y + 11){
-    BolaO.vy *= -1;
-    BolaO.y -= 10;
-  }else if(Player2.y + 90 < BolaO.y){
-    BolaO.vy *= -1;
-    BolaO.y += 10;
+  if((keys.up == true) && (-0.8 < BolaT)){
+    BolaO.vy -= 0.2
   }
-  BolaO.vx *= -1;
+  else if((keys.down == true) && (BolaT < 0.8)){
+    BolaO.vy += 0.2
+  }
+  if((BolaO.y+35 < Player2.y + 21) && (0 < BolaO.vy)){
+    BolaO.y -= 10;
+    BolaO.vy *= -1;
+  }else if((Player2.y + 80 < BolaO.y) && (BolaO.vy < 0)){
+    BolaO.y += 10;
+    BolaO.vy *= -1;
+  }
   BolaO.x -= 10;
+  BolaO.vx = -0.5;
   contadori = 1;
 }
 
 if(BolaT.isCollidingWith(Player1.getCollider("Player1")) && contadorj == 0){
-  if(BolaT.y+35 < Player1.y + 11){
-    BolaT.vy *= -1;
-    BolaT.y -= 10;
-  }else if(Player1.y + 90 < BolaT.y){
-    BolaT.vy *= -1;
-    BolaT.y += 10;
+  if(keys.kw == true){
+    BolaT.vy -= 0.2
   }
-  BolaT.vx *= -1;
-  BolaT.y += 10;
+  else if(keys.ks == true){
+    BolaT.vy += 0.2
+  }
+  if((BolaT.y+35 < Player1.y + 21) && (0 < BolaT.vy)){
+    BolaT.y -= 10;
+    BolaT.vy *= -1;
+  }else if((Player1.y + 80 < BolaT.y) && (BolaT.vy < 0)){
+    BolaT.y += 10;
+    BolaT.vy *= -1;
+  }
+  BolaT.x += 10;
+  BolaT.vx = 0.5;
   contadorj = 1;
 }else if(BolaT.isCollidingWith(Player2.getCollider("Player2")) && contadorj == 0){
-  if(BolaT.y+35 < Player2.y + 11){
+  if(keys.up == true){
+    BolaT.vy -= 0.2
+  }
+  else if(keys.down == true){
+    BolaT.vy += 0.2
+  }
+  if((BolaT.y+35 < Player2.y + 21) && (0 < BolaT.vy)){
     BolaT.vy *= -1;
     BolaT.y -= 10;
-  } else if(Player2.y + 90 < BolaT.y){
+  } else if((Player2.y + 80 < BolaT.y) && (BolaT.vy < 0)){
     BolaT.vy *= -1;
     BolaT.y += 10;
   }
-  BolaT.vx *= -1;
   BolaT.x -= 10;
+  BolaT.vx = -0.5;
   contadorj = 1;
 }
 
-
 for(var i= 0; i < blocosGame.length; i++) {
-
-  if(BolaO.isCollidingWith(blocosGame[i].getCollider())){
+  if((BolaO.isCollidingWith(blocosGame[i].getCollider())) && (contadori == 0)){
     blocosGame.splice(i, 1);
-  //  BolaO.vy *= -1;
+    contadori = 1;
+    BolaO.vy *= -1;
     BolaO.vx *= -1;
   }
 }
 
 for(var i= 0; i < blocosGame.length; i++) {
-
-  if(BolaT.isCollidingWith(blocosGame[i].getCollider())){
+  if((BolaT.isCollidingWith(blocosGame[i].getCollider())) && (contadorj == 0)){
     blocosGame.splice(i, 1);
-  //  BolaT.vy *= -1;
+    contadorj = 1;
+    BolaT.vy *= -1;
     BolaT.vx *= -1;
   }
 }
@@ -162,7 +207,7 @@ if(BolaT.x - BolaT.width < 0){
   if(contadori == 1){
     console.debug("Contadori = 1")
     timei += dt;
-    if(timei >= 1000){
+    if(timei >= 200){
         console.debug(timei);
         timei = 0;
         contadori = 0;
@@ -172,7 +217,7 @@ if(BolaT.x - BolaT.width < 0){
   if(contadorj == 1){
     console.debug("Contadorj = 1")
     timej += dt;
-    if(timej >= 1000){
+    if(timej >= 200){
         console.debug(timej);
         timej = 0;
         contadorj = 0;
@@ -195,19 +240,35 @@ function render(){//Desenhar os objetos no canvas
   context.drawImage(ImageLoader.images['player2'],Player2.x,Player2.y,100,100);
 
   for(var i = 0; i < blocosGame.length; i++){
-    blocosGame[i].draw();
-  }
+    //blocosGame[i]
+    context.drawImage(ImageLoader.images['bambu'],blocosGame[i].x,blocosGame[i].y,20,25);
+}
   //Camada dos objetos - Fim
 }
 
 
 function gameOver(){
+blocosGame.splice(0,blocosGame.length);
 console.debug("GameOver");
 context.clearRect(0,0, canvas.width, canvas.height);
-//context.drawImage(ImageLoader.images['vitoria'],0,0);
-//context.font = '40pt CHINESETAKEAWAY';
-//context.fillStyle = '#000000';
-//context.fillText("O Jogador " + win + " Venceu", (canvas.width / 2) - 220, canvas.height - (canvas.height * 0.10));
+if(win == "Player1"){
+  document.getElementById('gameOver-container').style.backgroundImage="url(imgs/blueWin.jpg)";
+  document.getElementById('restart').style.color= "#000000";
+  document.getElementById('Menu').style.color= "#000000";
+  document.getElementById('textWin').style.color= "#000000";
+  document.getElementById("textWin").innerHTML = "Player 1 Win <br><br> Chola Mais lixo";
+
+  document.getElementById("gameOver-container").style.boxShadow = "1px 1px 60px Aqua";
+
+}else if(win == "Player2"){
+  document.getElementById('gameOver-container').style.backgroundImage="url(imgs/redWin.jpg)";
+  document.getElementById('restart').style.color= "#FFFFFF";
+  document.getElementById('Menu').style.color= "#FFFFFF";
+  document.getElementById('textWin').style.color= "#FFFFFF";
+  document.getElementById("textWin").innerHTML = "Player 2 Win <br><br> Achei izi";
+  document.getElementById("gameOver-container").style.boxShadow = "1px 1px 60px red";
+}
+bgSound.pause();
 canvasElem.style.display = "none";
 overElem.style.display = 'block';
 console.debug("Restart block");

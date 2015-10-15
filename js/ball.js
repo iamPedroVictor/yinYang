@@ -7,8 +7,8 @@ function ball(x,y,context){
   this.vx = 0.3;
   this.vy = 0.3;
   this.collidables = [];
-  this.width = 25;
-  this.height = 25;
+  this.width = 20;
+  this.height = 20;
 
   this.color = 'black';
 }

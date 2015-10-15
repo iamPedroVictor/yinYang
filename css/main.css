@@ -1,5 +1,5 @@
 body {
-      background: #000;;
+      background: #000;
   }
   @font-face {
       font-family: 'CHINESETAKEAWAY';
@@ -9,8 +9,9 @@ body {
   p {
     padding-top: 20px;
     text-align: center;
-    font-size: 50px;
+    font-size: 45px;
     font-family: CHINESETAKEAWAY;
+    color: #FFFFFF;
   }
 
   h1 {
@@ -18,7 +19,7 @@ body {
     margin-left: 200px;
     width: 800px;
     height: 25px;
-    text-align: center;
+    text-align: -webkit-right;
     font-family: CHINESETAKEAWAY;
     color: darkturquoise;
   }
@@ -84,15 +85,17 @@ body {
   #restart {
     display: block;
     position: relative;
-    top: 438px;
-    left: 420px;
+    top: 420px;
+    left: 150px;
+    color:  #FFFFFF;
   }
 
   #Menu {
     display: block;
     position: relative;
-    top: 460px;
-    left: 450px;
+    top: 357px;
+    left: 730px;
+    color:  #FFFFFF;
   }
 
 

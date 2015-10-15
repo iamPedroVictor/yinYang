@@ -7,8 +7,8 @@ function Player(x,y, context){
   this.width = 100;
   this.height = 100;
   this.context = context;
-  this.velocityX = 0.7; //pixel/segundo
-  this.velocityY = 0.1; //pixel/segundo
+  this.velocityX = 0.1; //pixel/segundo
+  this.velocityY = 0.7; //pixel/segundo
 }
 
 Player.prototype.draw = function(){
@@ -19,23 +19,23 @@ Player.prototype.draw = function(){
 Player.prototype.update = function(input, dt, controler){
   //Atualizar posicao do jogador utilizando a velocidade
   if(controler == "Player2"){
-    if(input.left == true){
-        this.y -= this.velocityX * dt;
+    if(input.kup == true){
+        this.y -= this.velocityY * dt;
         if(this.y < 0){//verifica se esta colidindo com a parede
           this.y = 0;}
-        } else if(input.right == true){
-          this.y += this.velocityX * dt;
+        } else if(input.kdown == true){
+          this.y += this.velocityY * dt;
           if(this.y + this.height > canvas.height){//verifica se esta colidindo com a parede
             this.y = canvas.height - this.height;}
           }
   }
   if(controler == "Player1"){
-    if(input.up == true){
-        this.y -= this.velocityX * dt;
+    if(input.kw == true){
+        this.y -= this.velocityY * dt;
         if(this.y < 0){//verifica se esta colidindo com a parede
           this.y = 0;}
-        } else if(input.down == true){
-          this.y += this.velocityX * dt;
+        } else if(input.ks == true){
+          this.y += this.velocityY * dt;
           if(this.y + this.height > canvas.height){//verifica se esta colidindo com a parede
             this.y = canvas.height - this.height;}
           }

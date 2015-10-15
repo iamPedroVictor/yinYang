@@ -3,48 +3,48 @@
 // Outras teclas podem ser adicionadas utilizando os códigos disponíveis aqui:
 // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
 var keys = {
-    up: false, // Indica se a tecla cima foi pressionada
-    down: false, // Indica se a tecla baixo foi pressionada
-    left: false, // Indica se a tecla esquerda foi pressionada
-    right: false, // Indica se a tecla direita foi pressionada
+    kup: false, // Indica se a tecla cima foi pressionada
+    kdown: false, // Indica se a tecla baixo foi pressionada
+    kw: false, // Indica se a tecla esquerda foi pressionada
+    ks: false, // Indica se a tecla direita foi pressionada
     code : { // codigos para cada tecla
-		left : 38,
-		right : 40,
-    up: 87,
-		down : 83
+		kup : 38,
+		kdown : 40,
+    kw : 87,
+		ks : 83
 	}
 }
 
 
 function keyDown(e) { // detecta quando a tecla foi pressionada
-    if (e.keyCode == keys.code.up) { // se a tecla pressionada for igual ao código up
-        keys.up = true; // indica que a tecla cima foi pressionada
+    if (e.keyCode == keys.code.kw) { // se a tecla pressionada for igual ao código up
+        keys.kw = true; // indica que a tecla cima foi pressionada
     }
-    else if (e.keyCode == keys.code.down) {
-        keys.down = true;
+    else if (e.keyCode == keys.code.ks) {
+        keys.ks = true;
     }
 
-    if (e.keyCode == keys.code.left) {
-        keys.left = true;
+    if (e.keyCode == keys.code.kup) {
+        keys.kup = true;
     }
-    else if (e.keyCode == keys.code.right) {
-        keys.right = true;
+    else if (e.keyCode == keys.code.kdown) {
+        keys.kdown = true;
     }
 }
 
 function keyUp(e) { //detecta quando a tecla foi solta
-    if (e.keyCode == keys.code.up) { // se a tecla solta for igual ao código up
-        keys.up = false; // indica que a tecla cima foi solta
+    if (e.keyCode == keys.code.kw) { // se a tecla solta for igual ao código up
+        keys.kw = false; // indica que a tecla cima foi solta
     }
-    else if (e.keyCode == keys.code.down) {
-        keys.down = false;
+    else if (e.keyCode == keys.code.ks) {
+        keys.ks = false;
     }
 
-    if (e.keyCode == keys.code.left) {
-        keys.left = false;
+    if (e.keyCode == keys.code.kup) {
+        keys.kup = false;
     }
-    else if (e.keyCode == keys.code.right) {
-        keys.right = false;
+    else if (e.keyCode == keys.code.kdown) {
+        keys.kdown = false;
     }
 }
 
