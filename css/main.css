@@ -20,6 +20,7 @@ body {
     width: 800px;
     height: 25px;
     text-align: -webkit-right;
+    text-align: center;
     font-family: CHINESETAKEAWAY;
     color: darkturquoise;
   }

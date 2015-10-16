@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 //variaveis globais do jogo
 var canvas = document.getElementById("canvas"); //Referencia do canvas
@@ -12,8 +12,8 @@ var canvasElem = document.getElementById("canvas-container");
 var overElem = document.getElementById("gameOver-container");
 var Player1 = new Player(canvas.width - (canvas.width * 0.98),(canvas.height/2)-50,context);
 var Player2 = new Player(canvas.width - (canvas.width * 0.10),(canvas.height/2)-50,context);
-var BolaO = new ball(Player1.x + 115,Player1.y - 50,context);
-var BolaT = new ball((Player2.x - 10),(Player2.y - 50),context);
+var BolaO = new ball((Player1.x + 115),(Player1.y - 50),context);
+var BolaT = new ball((Player2.x - 115),(Player2.y - 50),context);
 var restart_btn = document.getElementById("restart");
 var menu_btn = document.getElementById("Menu");
 var contadori = 0;
@@ -28,9 +28,9 @@ bgSound.loop = true;
 //inicializando o jogo
 function gameInit(){
   //limpeza blocosGame
-  blocosGame.splice(0,blocosGame.length);
   bgSound.currentTime = 0;
   bgSound.play();
+  blocosGame.splice(0,blocosGame.length);
 
   var contadori = 0;
   var contadorj = 0;
@@ -98,13 +98,13 @@ if(BolaO.isCollidingWith(Player1.getCollider("Player1")) && contadori == 0){
     BolaO.vy += 0.2
   }
   if((BolaO.y+35 < Player1.y + 21) && (0 < BolaO.vy)){
-    BolaO.y -= 10;
+    BolaO.y -= 5;
     BolaO.vy *= -1;
   } else if((Player1.y + 80 < BolaO.y) && (BolaO.vy < 0)){
-    BolaO.y += 10;
+    BolaO.y += 5;
     BolaO.vy *= -1;
   }
-  BolaO.x += 10;
+  BolaO.x += 5;
   BolaO.vx = 0.5;
   contadori = 1;
 
@@ -116,13 +116,13 @@ if(BolaO.isCollidingWith(Player1.getCollider("Player1")) && contadori == 0){
     BolaO.vy += 0.2
   }
   if((BolaO.y+35 < Player2.y + 21) && (0 < BolaO.vy)){
-    BolaO.y -= 10;
+    BolaO.y -= 5;
     BolaO.vy *= -1;
   }else if((Player2.y + 80 < BolaO.y) && (BolaO.vy < 0)){
-    BolaO.y += 10;
+    BolaO.y += 5;
     BolaO.vy *= -1;
   }
-  BolaO.x -= 10;
+  BolaO.x -= 5;
   BolaO.vx = -0.5;
   contadori = 1;
 }
@@ -135,13 +135,13 @@ if(BolaT.isCollidingWith(Player1.getCollider("Player1")) && contadorj == 0){
     BolaT.vy += 0.2
   }
   if((BolaT.y+35 < Player1.y + 21) && (0 < BolaT.vy)){
-    BolaT.y -= 10;
+    BolaT.y -= 5;
     BolaT.vy *= -1;
   }else if((Player1.y + 80 < BolaT.y) && (BolaT.vy < 0)){
-    BolaT.y += 10;
+    BolaT.y += 5;
     BolaT.vy *= -1;
   }
-  BolaT.x += 10;
+  BolaT.x += 5;
   BolaT.vx = 0.5;
   contadorj = 1;
 }else if(BolaT.isCollidingWith(Player2.getCollider("Player2")) && contadorj == 0){
@@ -153,22 +153,36 @@ if(BolaT.isCollidingWith(Player1.getCollider("Player1")) && contadorj == 0){
   }
   if((BolaT.y+35 < Player2.y + 21) && (0 < BolaT.vy)){
     BolaT.vy *= -1;
-    BolaT.y -= 10;
+    BolaT.y -= 5;
   } else if((Player2.y + 80 < BolaT.y) && (BolaT.vy < 0)){
     BolaT.vy *= -1;
-    BolaT.y += 10;
+    BolaT.y += 5;
   }
-  BolaT.x -= 10;
+  BolaT.x -= 5;
   BolaT.vx = -0.5;
   contadorj = 1;
 }
 
 for(var i= 0; i < blocosGame.length; i++) {
-  if((BolaO.isCollidingWith(blocosGame[i].getCollider())) && (contadori == 0)){
+  if((BolaO.isCollidingWith(blocosGame[i].getCollider()))){
     blocosGame.splice(i, 1);
-    contadori = 1;
-    BolaO.vy *= -1;
-    BolaO.vx *= -1;
+    //contadori = 1;
+    if((BolaO.x < blocosGame[i].x)){
+      BolaO.vx *= -1;
+      BolaO.x -=5;
+    }
+    else if((blocosGame[i].x < BolaO.x)){
+      BolaO.vx *= -1;
+      BolaO.x +=5;
+    }
+    else if((BolaO.y < blocosGame[i].y)){
+      BolaO.vy *= -1;
+      BolaO.y -= 5;
+    }
+    else if((blocosGame[i].y < BolaO.y)){
+      BolaO.vy *= -1;
+      BolaO.y += 5;
+    }
   }
 }
 
@@ -176,28 +190,32 @@ for(var i= 0; i < blocosGame.length; i++) {
   if((BolaT.isCollidingWith(blocosGame[i].getCollider())) && (contadorj == 0)){
     blocosGame.splice(i, 1);
     contadorj = 1;
-    BolaT.vy *= -1;
-    BolaT.vx *= -1;
+    if((BolaT.x < blocosGame[i].x) || (blocosGame[i].x < BolaT.x)){
+      BolaT.vx *= -1;
+    }
+    else if((BolaT.y < blocosGame[i].y) || (blocosGame[i].y < BolaT.y)){
+      BolaT.vy *= -1;
+    }
   }
 }
 
 
 //condicao de vitoria
-if(BolaO.x - BolaO.width < 0){
+if((BolaO.x - BolaO.width < 0) || (BolaT.x - BolaT.width < 0)){
   win = 'Player2';
   gameStart = false;
-} else if( BolaO.x > canvas.width - BolaO.width){
+} else if((BolaO.x > canvas.width - BolaO.width) || (BolaT.x > canvas.width - BolaO.width)){
   win = 'Player1';
   gameStart = false;
 }
 
-if(BolaT.x - BolaT.width < 0){
+/*if(BolaT.x - BolaT.width < 0){
   win = 'Player2';
   gameStart = false;
-} else if( BolaT.x > canvas.width - BolaO.width){
+} else if(BolaT.x > canvas.width - BolaO.width){
   win = 'Player1';
   gameStart = false;
-}
+}*/
 
 //update dos objetos
   Player1.update(keys,dt,"Player1");
@@ -248,6 +266,7 @@ function render(){//Desenhar os objetos no canvas
 
 
 function gameOver(){
+bgSound.pause();
 blocosGame.splice(0,blocosGame.length);
 console.debug("GameOver");
 context.clearRect(0,0, canvas.width, canvas.height);
@@ -256,7 +275,7 @@ if(win == "Player1"){
   document.getElementById('restart').style.color= "#000000";
   document.getElementById('Menu').style.color= "#000000";
   document.getElementById('textWin').style.color= "#000000";
-  document.getElementById("textWin").innerHTML = "Player 1 Win <br><br> Chola Mais lixo";
+  document.getElementById("textWin").innerHTML = "Player 1 Win <br><br>";
 
   document.getElementById("gameOver-container").style.boxShadow = "1px 1px 60px Aqua";
 
@@ -265,10 +284,9 @@ if(win == "Player1"){
   document.getElementById('restart').style.color= "#FFFFFF";
   document.getElementById('Menu').style.color= "#FFFFFF";
   document.getElementById('textWin').style.color= "#FFFFFF";
-  document.getElementById("textWin").innerHTML = "Player 2 Win <br><br> Achei izi";
+  document.getElementById("textWin").innerHTML = "Player 2 Win <br><br>";
   document.getElementById("gameOver-container").style.boxShadow = "1px 1px 60px red";
 }
-bgSound.pause();
 canvasElem.style.display = "none";
 overElem.style.display = 'block';
 console.debug("Restart block");

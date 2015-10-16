@@ -5,6 +5,9 @@
   var canvasElem = document.getElementById("canvas-container");
   var aboutElem = document.getElementById("about-container");
 
+
+  var bgSound = new Audio("assets/menu_converted.ogg");
+  bgSound.loop = true;
   var startBtn = document.getElementById('start_btn');
   var aboutBtn = document.getElementById('about_btn');
   var backBtn = document.getElementById('back_btn');
@@ -13,6 +16,8 @@
 
     menuElem.style.display = "none";
     canvasElem.style.display = "block";
+
+    bgSound.pause();
     gameInit();
   }
 
@@ -36,9 +41,12 @@
         'bolaAzul': 'sprite/bolaazul.png',
         'bolaVermelha': 'sprite/bolavermelha.png',
         'fundo': 'imgs/fundo.jpg',
+        'vitoria': 'imgs/VITORIA.jpg',
         'bambu': 'sprite/bambu.png'
     }, function(){
         menuElem.style.display = "block";
+        bgSound.currentTime = 0;
+        bgSound.play();
     });
   }
 
